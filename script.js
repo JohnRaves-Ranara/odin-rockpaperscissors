@@ -42,6 +42,15 @@ function playRound(computerChoice, userChoice){
     }
 }
 
+function restartConfirmation(){
+    let restartChoice = confirm('Restart the game?');
+
+    if(restartChoice===true){
+        console.clear();
+        game();
+    }
+}
+
 
 function game(){
     let computerScore = 0;
@@ -49,8 +58,14 @@ function game(){
     for(let round=1; round<=5; round++){
         let computerChoice = getComputerChoice();
         let userChoice = prompt(`Round ${round}/5\nComputer has chosen!\nWhat is your move? Rock, paper, or scissors?`).toLowerCase();
+
+        //plays one round, returns the result 'You win', 'You lose', or 'Its a tie.'
         let play = playRound(computerChoice, userChoice);
+
+        //shows computer and user choice
         console.log(`Computer: ${computerChoice}\nYou: ${userChoice}\n\n`);
+
+        //prints the result of the round
         console.log(play);
         if(play==='You win!'){
             userScore++;
@@ -73,12 +88,7 @@ function game(){
         }
     }
 
-    let restartChoice = confirm('Restart the game?');
-
-    if(restartChoice===true){
-        console.clear();
-        game();
-    }
+    restartConfirmation();
 }
 
 
