@@ -3,45 +3,71 @@ let choices = ['rock', 'paper', 'scissors'];
 
 
 
+let paperChoice = document.querySelector("#paper").addEventListener("click", () => {
+    playRound(getComputerChoice(), 'paper')
+})
 
+let scissorsChoice = document.querySelector("#scissors").addEventListener("click", () => {
+    playRound(getComputerChoice(), 'scissors')
+})
+
+let resultText = document.querySelector(".result-text")
+
+let rockChoice = document.querySelector("#rock").addEventListener("click", () => {
+    playRound(getComputerChoice(), 'rock')
+})
+
+resultText.textContent = "Computer has chosen! What is your move?"
+
+let computerChoiceImage = document.querySelector(".image.computer")
+let userChoiceImage = document.querySelector(".image.user")
+
+function clearResult(){
+    resultText.textContent = "Computer has chosen! What is your move?"
+}
 function getComputerChoice(){
     return choices[Math.floor(Math.random() * choices.length)];
 }
 function playRound(computerChoice, userChoice){
-    
+    console.log(`${computerChoice} ${userChoice}`)
     if(userChoice=='rock'){
         if(computerChoice==='paper'){
-            return `You lose.`;
+            resultText.textContent =  "You lose.";
         }
         else if(computerChoice==='rock'){
-            return `It's a tie!`;
+            resultText.textContent = "It's a tie!";
         }
         else{
-            return `You win!`;
+            resultText.textContent = "You win!";
         }
     }
     else if(userChoice==='paper'){
         if(computerChoice==='rock'){
-            return `You win!`;
+            resultText.textContent = "You win!";
         }
         else if(computerChoice==='scissors'){
-            return `You lose.`;
+            resultText.textContent = "You lose.";
         }
         else{
-            return `It's a tie!`;
+            resultText.textContent = "It's a tie!";
         }
     }
     else{
         if(computerChoice==='rock'){
-            return `You lose.`;
+            resultText.textContent = "You lose.";
         }
         else if(computerChoice==='scissors'){
-            return `It's a tie!`;
+            resultText.textContent = "It's a tie!";
         }
         else{
-            return `You win!`;
+            resultText.textContent = "You win!";
         }
     }
+
+    computerChoiceImage.src = `assets/${computerChoice}.jpg`
+    userChoiceImage.src = `assets/${userChoice}.jpg` 
+
+    // clearResult();
 }
 
 function restartConfirmation(){
@@ -94,7 +120,7 @@ function game(){
 }
 
 
-game();
+// game();
 
 
 
