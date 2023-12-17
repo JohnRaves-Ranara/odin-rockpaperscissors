@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 
 <html>
-    <head><title>rock paper scissos odin</title></head>
+    <head>
+    <title>rock paper scissos odin</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css">
+    </head>
     <body>
-        <h1>
-            rockpaperscissors odin
-        </h1>
+        <div class="wrapper">
+            <div class="scores">
+                <h2 id="user-score" class="score"></h2>
+                <h2 id="computer-score" class="score"></h2>
+            </div>
+            <div class="container">
+                <div class="display-choice user">
+                    <img src="assets\question-mark.jpeg" alt="" class="image user">
+                </div>
+                <div class="result">
+                    Computer has chosen! What is your move?
+                </div>
+                <div class="display-choice computer">
+                    <img src="assets\question-mark.jpeg" alt="" class="image computer">
+                </div>
+            </div>
+            <div class="choices">
+                <img src="assets\rock.png" class="choice" id="rock">
+                <img src="assets\paper.jpg" class="choice" id="paper">
+                <img src="assets\scissors.jpg" class="choice" id="scissors">'
+                    
+            </div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

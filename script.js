@@ -2,6 +2,8 @@
 let choices = ['rock', 'paper', 'scissors'];
 
 
+
+
 function getComputerChoice(){
     return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -76,7 +78,7 @@ function game(){
         console.log(`SCORE:\nComputer: ${computerScore}\nUser Score: ${userScore}`);
     }
 
-    if(userScore==0 && computerScore==0){
+    if(userScore==0 && computerScore==0 || userScore===computerScore){
         console.log('TIE GAME!');
     }
     else{
