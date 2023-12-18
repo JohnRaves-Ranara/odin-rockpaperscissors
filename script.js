@@ -4,43 +4,58 @@ let choices = ['rock', 'paper', 'scissors'];
 let userScore = 0
 let computerScore = 0
 
+let hasWinner = false
+
 const userScoreText = document.querySelector("#user-score")
 const computerScoreText = document.querySelector("#computer-score")
 
 userScoreText.textContent = userScore
 computerScoreText.textContent = computerScore
 
+const choice = document.querySelectorAll(".choice")
+
 let paperChoice = document.querySelector("#paper").addEventListener("click", () => {
     playRound(getComputerChoice(), 'paper')
 })
-
 let scissorsChoice = document.querySelector("#scissors").addEventListener("click", () => {
     playRound(getComputerChoice(), 'scissors')
 })
-
-let resultText = document.querySelector(".result-text")
-
 let rockChoice = document.querySelector("#rock").addEventListener("click", () => {
     playRound(getComputerChoice(), 'rock')
 })
 
+let resultText = document.querySelector(".result-text")
 resultText.textContent = "Computer has chosen! What is your move?"
 
-const resetRoundButton = ""
+const resetButton = document.createElement("button")
+resetButton.classList.add("reset-button")
+resetButton.textContent = "Next round"
+resetButton.style.cssText = "background-color: dodgerblue; font-size: 20px; font-weight: bold; padding: 1em 1.5em; display: none; border-radius: 10px; color: white;"
+document.querySelector(".result").append(resetButton)
+resetButton.addEventListener("click", resetRound)
 
 let computerChoiceImage = document.querySelector(".image.computer")
 let userChoiceImage = document.querySelector(".image.user")
 
-function resetRound(resetScores){
-    if(resetScores){
+function resetRound(){
+    if(hasWinner){
         userScore = 0
         computerScore = 0
         userScoreText.textContent = userScore
         computerScoreText.textContent = computerScore
+        hasWinner = false
     }
     resultText.textContent = "Computer has chosen! What is your move?"
     computerChoiceImage.src = "assets/question-mark.jpeg"
     userChoiceImage.src = "assets/question-mark.jpeg"
+
+    //hide reset button
+    resetButton.style["display"] = "none"
+
+    //show choices
+    choice.forEach((choice) => {
+        choice.style["display"] = "block"
+    })
     
 }
 
@@ -54,10 +69,9 @@ function addScore(result){
         computerScoreText.textContent = computerScore
     }
 
-    // if(userScore===5 || computerScore===5){
-    //     return true
-    // }
-    // return false
+    if(userScore===5 || computerScore===5){
+        hasWinner = true
+    }
 }
 
 function getComputerChoice(){
@@ -99,70 +113,33 @@ function playRound(computerChoice, userChoice){
     }
 
     //this function adds the score and returns true if user/computer has 5 points
-    let checkWinner = addScore(resultText.textContent)
+    addScore(resultText.textContent)
     
-    //this resets the scores 
-    // if(checkWinner){
-    //     resetRound(true)
-    // }
+    //changes reset button text to restart game if there is a winner already
+    if(hasWinner){
+        resetButton.textContent = "Restart game"
 
-    computerChoiceImage.src = `assets/${computerChoice}.jpg`
-    userChoiceImage.src = `assets/${userChoice}.jpg` 
-
-    // resetRound(false)
-}
-
-function restartConfirmation(){
-    let restartChoice = confirm('Restart the game?');
-
-    if(restartChoice===true){
-        console.clear();
-        game();
-    }
-}
-
-
-function game(){
-    let computerScore = 0;
-    let userScore = 0;
-    for(let round=1; round<=5; round++){
-        let computerChoice = getComputerChoice();
-        let userChoice = prompt(`Round ${round}/5\nComputer has chosen!\nWhat is your move? Rock, paper, or scissors?`).toLowerCase();
-
-        //plays one round, returns the result 'You win', 'You lose', or 'Its a tie.'
-        let play = playRound(computerChoice, userChoice);
-
-        //shows computer and user choice
-        console.log(`Computer: ${computerChoice}\nYou: ${userChoice}\n\n`);
-
-        //prints the result of the round
-        console.log(play);
-        if(play==='You win!'){
-            userScore++;
-        }
-        else if(play==='You lose.'){
-            computerScore++;
-        }
-        console.log(`SCORE:\nComputer: ${computerScore}\nUser Score: ${userScore}`);
-    }
-
-    if(userScore==0 && computerScore==0 || userScore===computerScore){
-        console.log('TIE GAME!');
-    }
-    else{
+        //displays the winner and score
         if(userScore>computerScore){
-            console.log('YOU WIN THE GAME!');
+            resultText.textContent = `You win ${userScore} - ${computerScore}!`
         }
         else{
-            console.log('YOU LOSE THE GAME! COMPUTER WINS!');
+            resultText.textContent = `Computer wins ${computerScore} - ${userScore}!`
         }
     }
 
-    restartConfirmation();
+    //shows restart button
+    resetButton.style["display"] = "block"
+
+    //hide choices
+    choice.forEach((choice) => {
+        choice.style["display"] = "none"
+    })
+
+    //displays the player's choices
+    computerChoiceImage.src = `assets/${computerChoice}.jpg`
+    userChoiceImage.src = `assets/${userChoice}.jpg` 
 }
-
-
-// game();
 
 
 

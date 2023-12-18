@@ -33,14 +33,20 @@ h2{
     align-items: center;
     justify-content: space-evenly;
     gap: 10rem;
+    /* background: yellow; */
     /* border: 2px solid red; */
 }
 
 .display-choice{
+    /* background-color: aqua; */
     display: flex;
     align-items: center;
     flex-direction: column;
     /* border: 2px solid red; */
+}
+
+.display-choice > :last-child{
+    font-size: 2em;
 }
 
 .result{
@@ -63,7 +69,8 @@ h2{
 }
 
 .choices{
-    /* background-color: aqua; */
+    /* background-color: green; */
+    margin-top: 5px;
     width: 100dvw;
     display: flex;
     justify-content: center;
@@ -83,6 +90,18 @@ h2{
     object-fit: cover;
     border: 2px solid black;
     border-radius: 10px;
+}
+
+.choice:hover{
+    cursor: pointer;
+}
+
+.reset-button:hover{
+    cursor: pointer;
+}
+
+.score{
+    font-size: 2em;
 }
 
 
