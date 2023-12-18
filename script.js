@@ -1,7 +1,14 @@
 
 let choices = ['rock', 'paper', 'scissors'];
 
+let userScore = 0
+let computerScore = 0
 
+const userScoreText = document.querySelector("#user-score")
+const computerScoreText = document.querySelector("#computer-score")
+
+userScoreText.textContent = userScore
+computerScoreText.textContent = computerScore
 
 let paperChoice = document.querySelector("#paper").addEventListener("click", () => {
     playRound(getComputerChoice(), 'paper')
@@ -19,17 +26,44 @@ let rockChoice = document.querySelector("#rock").addEventListener("click", () =>
 
 resultText.textContent = "Computer has chosen! What is your move?"
 
+const resetRoundButton = ""
+
 let computerChoiceImage = document.querySelector(".image.computer")
 let userChoiceImage = document.querySelector(".image.user")
 
-function clearResult(){
+function resetRound(resetScores){
+    if(resetScores){
+        userScore = 0
+        computerScore = 0
+        userScoreText.textContent = userScore
+        computerScoreText.textContent = computerScore
+    }
     resultText.textContent = "Computer has chosen! What is your move?"
+    computerChoiceImage.src = "assets/question-mark.jpeg"
+    userChoiceImage.src = "assets/question-mark.jpeg"
+    
 }
+
+function addScore(result){
+    if(result=='You win!'){
+        userScore++
+        userScoreText.textContent = userScore
+    }
+    else if(result=='You lose.'){
+        computerScore++
+        computerScoreText.textContent = computerScore
+    }
+
+    // if(userScore===5 || computerScore===5){
+    //     return true
+    // }
+    // return false
+}
+
 function getComputerChoice(){
     return choices[Math.floor(Math.random() * choices.length)];
 }
 function playRound(computerChoice, userChoice){
-    console.log(`${computerChoice} ${userChoice}`)
     if(userChoice=='rock'){
         if(computerChoice==='paper'){
             resultText.textContent =  "You lose.";
@@ -64,10 +98,18 @@ function playRound(computerChoice, userChoice){
         }
     }
 
+    //this function adds the score and returns true if user/computer has 5 points
+    let checkWinner = addScore(resultText.textContent)
+    
+    //this resets the scores 
+    // if(checkWinner){
+    //     resetRound(true)
+    // }
+
     computerChoiceImage.src = `assets/${computerChoice}.jpg`
     userChoiceImage.src = `assets/${userChoice}.jpg` 
 
-    // clearResult();
+    // resetRound(false)
 }
 
 function restartConfirmation(){

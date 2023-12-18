@@ -63,18 +63,19 @@ h2{
 }
 
 .choices{
-    /* border: 2px solid green; */
+    /* background-color: aqua; */
     width: 100dvw;
     display: flex;
     justify-content: center;
-    gap: 80px;
 }
 
-/* .choice{
-    height: 190px;
-    width: 180px;
-    border: 2px solid brown;
-} */
+.choice#rock{
+    margin-right: 80px;
+}
+
+.choice#scissors{
+    margin-left: 80px;
+}
 
 .choice{
     height: 190px;
